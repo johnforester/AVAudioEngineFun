@@ -88,6 +88,12 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <switch opaque="NO" tag="500" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAj-KW-tGa">
+                                        <rect key="frame" x="107" y="48" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="delayOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="BOj-pi-yam"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -142,6 +148,9 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <switch opaque="NO" tag="501" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DBa-lv-JNK">
+                                        <rect key="frame" x="122" y="48" width="51" height="31"/>
+                                    </switch>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>

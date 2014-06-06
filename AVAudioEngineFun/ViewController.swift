@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     var delays: AVAudioUnitDelay[] = AVAudioUnitDelay[]()
     let delayTimeTag: Int = 100
     let delayFeedbackTag: Int = 200
+    let delayOnOffTag: Int = 500
     
     var pitches: AVAudioUnitTimePitch[] = AVAudioUnitTimePitch[]()
     let pitchPitchTag: Int = 300
@@ -175,6 +176,7 @@ class ViewController: UIViewController {
             self.audioFilePlayer.scheduleFile(self.audioFile, atTime: nil, completionHandler:
                 {
                     println("done playing file")
+                    self.filePlayerButton.setTitle("pause", forState: .Normal)
                 })
             self.audioFilePlayer.play()
             self.filePlayerButton.setTitle("pause", forState: .Normal)
@@ -199,6 +201,11 @@ class ViewController: UIViewController {
     @IBAction func rateSliderChanged(slider : UISlider) {
         let pitch: AVAudioUnitTimePitch = self.pitches[slider.tag - self.pitchRateTag]
         pitch.rate = slider.value
+    }
+    
+    @IBAction func delayOnOffChanged(delaySwitch : UISwitch) {
+            let delay: AVAudioUnitDelay = self.delays[delaySwitch.tag - self.delayOnOffTag]
+        delay.wetDryMix = 0
     }
 }
 
