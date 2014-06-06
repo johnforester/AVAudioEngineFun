@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A763D45194149A70029A4E5 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A763D44194149A70029A4E5 /* arrow.png */; };
 		7A8AC48D1940EFD8004545D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AC48C1940EFD8004545D1 /* AppDelegate.swift */; };
 		7A8AC48F1940EFD8004545D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AC48E1940EFD8004545D1 /* ViewController.swift */; };
 		7A8AC4921940EFD8004545D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A8AC4901940EFD8004545D1 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A763D44194149A70029A4E5 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		7A8AC4871940EFD8004545D1 /* AVAudioEngineFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVAudioEngineFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8AC48B1940EFD8004545D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A8AC48C1940EFD8004545D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				7A8AC48C1940EFD8004545D1 /* AppDelegate.swift */,
 				7A8AC48E1940EFD8004545D1 /* ViewController.swift */,
 				7A8AC4901940EFD8004545D1 /* Main.storyboard */,
+				7A763D44194149A70029A4E5 /* arrow.png */,
 				7A8AC4931940EFD8004545D1 /* Images.xcassets */,
 				7A8AC48A1940EFD8004545D1 /* Supporting Files */,
 			);
@@ -195,6 +198,7 @@
 				7A8AC4921940EFD8004545D1 /* Main.storyboard in Resources */,
 				7A8AC4AC1940F91F004545D1 /* developers.aif in Resources */,
 				7A8AC4941940EFD8004545D1 /* Images.xcassets in Resources */,
+				7A763D45194149A70029A4E5 /* arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +407,7 @@
 				7A8AC4A51940EFD8004545D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A8AC4A61940EFD8004545D1 /* Build configuration list for PBXNativeTarget "AVAudioEngineFunTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +416,7 @@
 				7A8AC4A81940EFD8004545D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

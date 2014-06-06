@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     let audioFilePlayer: AVAudioPlayerNode = AVAudioPlayerNode()
     
     var delays: AVAudioUnitDelay[] = AVAudioUnitDelay[]()
+    let delayTimeTag: Int = 100
+    let delayFeedbackTag: Int = 200
+    
     var generatorNodes: AVAudioNode[] = AVAudioNode[]()
     
     let updateTime: Float = 0.05
@@ -25,9 +28,6 @@ class ViewController: UIViewController {
     
     @IBOutlet var filePlayerButton : UIButton
     @IBOutlet var filePlaySlider : UISlider
-    
-    @IBOutlet var delayTimeSlider : UISlider
-    @IBOutlet var delayFeedbackSlider : UISlider
     
     @IBOutlet var micSwitch : UISwitch
     
@@ -85,6 +85,17 @@ class ViewController: UIViewController {
          
             self.audioEngine.connect(node, to:delay, format:format)
             self.audioEngine.connect(delay, to: mixer, format: self.audioEngine.inputNode.inputFormatForBus(0))
+        }
+        
+        for (var i = 0; i < self.delays.count; i++)
+        {
+            let delay: AVAudioUnitDelay = self.delays[i]
+
+            let timeSlider: UISlider = self.view.viewWithTag(self.delayTimeTag + i) as UISlider
+            timeSlider.value = CFloat(delay.delayTime)
+            
+            let feedbackSlider: UISlider = self.view.viewWithTag(self.delayFeedbackTag + i) as UISlider
+            feedbackSlider.value = CFloat(delay.feedback)
         }
 
         var engineError: NSError?
@@ -146,12 +157,14 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func delayFeedbackSliderChanged(sender : AnyObject) {
-        //self.delay.feedback = self.delayFeedbackSlider.value
+    @IBAction func delayFeedbackSliderChanged(slider : UISlider) {
+        let delay: AVAudioUnitDelay = self.delays[slider.tag - self.delayFeedbackTag]
+        delay.feedback = slider.value
     }
     
-    @IBAction func delayTimeSliderChanged(sender : AnyObject) {
-        //self.delay.delayTime = NSTimeInterval(self.delayTimeSlider.value)
+    @IBAction func delayTimeSliderChanged(slider : UISlider) {
+        let delay: AVAudioUnitDelay = self.delays[slider.tag - self.delayTimeTag]
+        delay.delayTime = NSTimeInterval(slider.value)
     }
 }
 
