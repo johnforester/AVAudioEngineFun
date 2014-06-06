@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="q3v-qU-NCU">
-                                <rect key="frame" x="357" y="443" width="218" height="145"/>
+                                <rect key="frame" x="260" y="359" width="215" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="IkZ-T1-xUe">
@@ -29,7 +29,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="20t-hR-L4T">
-                                <rect key="frame" x="269" y="149" width="222" height="133"/>
+                                <rect key="frame" x="282" y="107" width="204" height="59"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="CI1-61-mM5">
@@ -37,7 +37,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="fZU-XH-VNQ">
-                                <rect key="frame" x="546" y="302" width="222" height="64"/>
+                                <rect key="frame" x="546" y="180" width="222" height="64"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dM7-7r-nap">
@@ -103,7 +103,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAj-KW-tGa">
-                                        <rect key="frame" x="107" y="48" width="51" height="31"/>
+                                        <rect key="frame" x="107" y="48" width="51.5" height="31"/>
                                         <connections>
                                             <action selector="delayOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="BOj-pi-yam"/>
                                         </connections>
@@ -112,7 +112,7 @@
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dXe-pV-6Yh">
-                                <rect key="frame" x="269" y="20" width="211" height="146"/>
+                                <rect key="frame" x="269" y="20" width="211" height="81"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MIC INPUT NODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQp-sM-Pw8">
                                         <rect key="frame" x="47" y="20" width="139.5" height="20.5"/>
@@ -121,7 +121,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xs5-Kl-kFV">
-                                        <rect key="frame" x="20" y="70" width="51" height="31"/>
+                                        <rect key="frame" x="6" y="39" width="51" height="31"/>
                                         <connections>
                                             <action selector="micSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="flm-sm-LEj"/>
                                         </connections>
@@ -130,7 +130,7 @@
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jv6-gT-cwm">
-                                <rect key="frame" x="269" y="259" width="211" height="198"/>
+                                <rect key="frame" x="269" y="159" width="211" height="198"/>
                                 <subviews>
                                     <slider opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="O3h-eN-aZG">
                                         <rect key="frame" x="11" y="97" width="182" height="31"/>
@@ -208,7 +208,7 @@
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MTm-76-q8K">
-                                <rect key="frame" x="365" y="573" width="302" height="381"/>
+                                <rect key="frame" x="234" y="415" width="252" height="252"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DISTORTION NODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIm-ox-7tA">
                                         <rect key="frame" x="34" y="20" width="154.5" height="20.5"/>
@@ -217,7 +217,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Awt-CA-K6V">
-                                        <rect key="frame" x="20" y="46" width="266.5" height="315"/>
+                                        <rect key="frame" x="20" y="46" width="198.5" height="200"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="bOA-US-WCH"/>
@@ -225,7 +225,7 @@
                                         </connections>
                                     </tableView>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XY2-6U-Vbm">
-                                        <rect key="frame" x="233" y="7" width="51" height="31"/>
+                                        <rect key="frame" x="196" y="9" width="51" height="31"/>
                                         <connections>
                                             <action selector="distortionOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="mg7-uw-fTO"/>
                                         </connections>
@@ -260,12 +260,12 @@
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="jVp-I3-JMC">
-                                <rect key="frame" x="542" y="80" width="200" height="2.5"/>
+                                <rect key="frame" x="546" y="20" width="200" height="2.5"/>
                                 <color key="progressTintColor" red="0.056592266400000001" green="1" blue="0.24572494789999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="trackTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GXl-VD-aJM">
-                                <rect key="frame" x="537" y="159" width="211" height="146"/>
+                                <rect key="frame" x="537" y="37" width="211" height="146"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rG2-RK-geN">
                                         <rect key="frame" x="31" y="58" width="142" height="30"/>
@@ -294,7 +294,7 @@
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j96-du-uUj">
-                                <rect key="frame" x="542" y="367" width="211" height="198"/>
+                                <rect key="frame" x="541" y="242" width="211" height="198"/>
                                 <subviews>
                                     <slider opaque="NO" tag="102" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="kTK-Lb-aJ5">
                                         <rect key="frame" x="11" y="97" width="182" height="31"/>
@@ -330,6 +330,36 @@
                                         <rect key="frame" x="122" y="48" width="51" height="31"/>
                                         <connections>
                                             <action selector="delayOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="EVa-bh-zyZ"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gi2-xx-SU8">
+                                <rect key="frame" x="542" y="448" width="215" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mPB-YC-8Lg">
+                                <rect key="frame" x="516" y="504" width="252" height="252"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DISTORTION NODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVc-D5-J1K">
+                                        <rect key="frame" x="34" y="20" width="154.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="pT8-UU-m4o">
+                                        <rect key="frame" x="20" y="46" width="198.5" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="WhT-Jc-X40"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="vMs-TH-kUQ"/>
+                                        </connections>
+                                    </tableView>
+                                    <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h2r-DK-Qv8">
+                                        <rect key="frame" x="196" y="9" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="distortionOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="f0k-Hl-enX"/>
                                         </connections>
                                     </switch>
                                 </subviews>

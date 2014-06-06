@@ -57,11 +57,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var generatorNodes: AVAudioNode[] = AVAudioNode[]()
     
-    let updateTime: Float = 0.05
-    
-    var timer :NSTimer? = nil //set this in viewDidLoad
-    
-    
     @IBOutlet var filePlayerButton : UIButton
     @IBOutlet var filePlaySlider : UISlider
     
@@ -98,18 +93,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.generatorNodes.append(self.audioEngine.inputNode)
         
         //sampler setup
+        let samplerFilePath: String = NSBundle.mainBundle().pathForResource("developersSingle", ofType: "aif")
+        let sampleURL: NSURL = NSURL.URLWithString(samplerFilePath)
+        let sampleURLS: AnyObject[]! = [sampleURL]
+        
         var samplerError: NSError?
         
-        let samplerFilePath: String = NSBundle.mainBundle().pathForResource("developersSingle", ofType: "aif")
+        if let errorValue = samplerError {
+            println("ERROR: \(errorValue.localizedDescription)")
+        }
         
-        
-        let sampleURL: NSURL = NSURL.URLWithString(samplerFilePath)
-        
-        let sampleURLS: AnyObject[]! = [sampleURL]
         self.sampler.loadAudioFilesAtURLs(sampleURLS, error: &samplerError)
+        
         self.audioEngine.attachNode(self.sampler)
         self.generatorNodes.append(self.sampler)
-        
         
         // tap
         self.audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 8192, format: nil, block:
@@ -128,11 +125,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                             //println("\(frames[i])")
                             dispatch_async(dispatch_get_main_queue(), {
                                 self.outputMeter.progress = fabsf(frames[i])
-                            })
+                                })
                         }
                     }
                 }
-                
             })
         
         //effects setup
@@ -163,13 +159,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.audioEngine.connect(timePitch, to: distortion, format: format)
                 self.audioEngine.connect(distortion, to: delay, format: format)
                 self.audioEngine.connect(delay, to: mixer, format: format)
-            } else if node == self.audioEngine.inputNode{
+            } else {
                 format = self.audioEngine.inputNode.inputFormatForBus(0)
                 self.audioEngine.connect(node, to: distortion, format: format)
                 self.audioEngine.connect(distortion, to: delay, format: format)
-            } else {
-                format = self.audioEngine.inputNode.inputFormatForBus(0)
-                self.audioEngine.connect(node, to: delay, format: format)
             }
             
             self.audioEngine.connect(delay, to: mixer, format: format)
