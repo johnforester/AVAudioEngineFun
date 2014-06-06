@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
@@ -13,133 +13,93 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dM7-7r-nap">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dM7-7r-nap">
+                                <rect key="frame" x="20" y="20" width="211" height="146"/>
                                 <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KJc-Yq-3hD">
-                                        <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
-                                        <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="18" y="109" width="118" height="31"/>
-                                        </variation>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KJc-Yq-3hD">
+                                        <rect key="frame" x="18" y="109" width="175" height="31"/>
                                         <connections>
                                             <action selector="filePlayerSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="8Yc-db-F97"/>
                                         </connections>
                                     </slider>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lBM-Ep-xk7">
-                                        <rect key="frame" x="35" y="44" width="53" height="30"/>
+                                        <rect key="frame" x="20" y="62" width="53" height="30"/>
                                         <state key="normal" title="play file">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="20" y="62" width="53" height="30"/>
-                                        </variation>
                                         <connections>
                                             <action selector="playFileButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LbZ-87-btt"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAYER NODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xp3-a7-kAu">
-                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PLAYER NODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xp3-a7-kAu">
+                                        <rect key="frame" x="47" y="20" width="116.5" height="20.5"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="47" y="20" width="117" height="21"/>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="47" y="20" width="116.5" height="20.5"/>
-                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="KJc-Yq-3hD"/>
-                                        <exclude reference="lBM-Ep-xk7"/>
-                                        <exclude reference="xp3-a7-kAu"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="20" width="211" height="144"/>
-                                    <mask key="subviews">
-                                        <include reference="KJc-Yq-3hD"/>
-                                        <include reference="lBM-Ep-xk7"/>
-                                        <include reference="xp3-a7-kAu"/>
-                                    </mask>
-                                </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOB-rY-L3F">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EOB-rY-L3F">
+                                <rect key="frame" x="20" y="259" width="211" height="198"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELAY NODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1d-Ff-pg7">
-                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="dNT-No-rkr">
+                                        <rect key="frame" x="11" y="97" width="182" height="31"/>
+                                        <connections>
+                                            <action selector="delayTimeSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="CEU-bh-1CC"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DELAY NODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1d-Ff-pg7">
+                                        <rect key="frame" x="47" y="20" width="117" height="20.5"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="47" y="20" width="117" height="21"/>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="47" y="20" width="116.5" height="20.5"/>
-                                        </variation>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dNT-No-rkr">
-                                        <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
-                                        <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="18" y="109" width="118" height="31"/>
-                                        </variation>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="GdM-96-FSh">
+                                        <rect key="frame" x="11" y="164" width="182" height="31"/>
+                                        <connections>
+                                            <action selector="delayFeedbackSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="6rq-UY-9sh"/>
+                                        </connections>
                                     </slider>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xi8-v7-sF9">
+                                        <rect key="frame" x="13" y="135" width="76" height="20.5"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXi-tH-XAs">
+                                        <rect key="frame" x="13" y="73" width="37.5" height="20.5"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="x1d-Ff-pg7"/>
-                                        <exclude reference="dNT-No-rkr"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="20" width="211" height="144"/>
-                                    <mask key="subviews">
-                                        <include reference="x1d-Ff-pg7"/>
-                                        <include reference="dNT-No-rkr"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <rect key="frame" x="28" y="259" width="211" height="198"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJp-b3-nSE">
+                                <rect key="frame" x="272" y="20" width="512" height="146"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="dM7-7r-nap"/>
-                                <exclude reference="EOB-rY-L3F"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular">
-                            <mask key="subviews">
-                                <include reference="dM7-7r-nap"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <mask key="subviews">
-                                <include reference="EOB-rY-L3F"/>
-                            </mask>
-                        </variation>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="delayFeedbackSlider" destination="GdM-96-FSh" id="aTR-zY-ubt"/>
+                        <outlet property="delayTimeSlider" destination="dNT-No-rkr" id="AWC-mz-awi"/>
                         <outlet property="filePlaySlider" destination="KJc-Yq-3hD" id="Szi-JS-NHR"/>
                         <outlet property="filePlayerButton" destination="lBM-Ep-xk7" id="ZX0-cf-iIB"/>
+                        <outlet property="oscilloscope" destination="EJp-b3-nSE" id="ygg-5K-xZl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.75" y="144"/>
+            <point key="canvasLocation" x="-64" y="254"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>
