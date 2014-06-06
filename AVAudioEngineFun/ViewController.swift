@@ -52,6 +52,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         "SpeechWaves",
     ]
     
+    let sampler: AVAudioUnitSampler = AVAudioUnitSampler()
+    var samplerNote: Int = 50
+    
     var generatorNodes: AVAudioNode[] = AVAudioNode[]()
     
     let updateTime: Float = 0.05
@@ -63,6 +66,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var filePlaySlider : UISlider
     
     @IBOutlet var micSwitch : UISwitch
+    @IBOutlet var outputMeter : UIProgressView
     
     //MARK: - UIViewController methods
     override func viewDidLoad() {
@@ -71,7 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.filePlaySlider.value = self.audioFilePlayer.volume
         
         //audio file
-        let filePath: String = NSBundle.mainBundle().pathForResource("developers", ofType: "mp3")
+        let filePath: String = NSBundle.mainBundle().pathForResource("developers", ofType: "aif")
         
         println("\(filePath)")
         
@@ -93,24 +97,43 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.audioEngine.inputNode.volume = 0
         self.generatorNodes.append(self.audioEngine.inputNode)
         
-        //wave tap
-        //        self.audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 512, format: self.audioEngine.inputNode.inputFormatForBus(0), block:
-        //            {
-        //                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
-        //
-        //                for (var j = 0; j < Int(buffer.format.channelCount); j++)
-        //                {
-        //                    var frames = buffer.floatChannelData[j]
-        //
-        //                    var frameLength = Int(buffer.frameLength)
-        //
-        //                    for (var i = 0; i < frameLength; i++)
-        //                    {
-        //                        //frames[i] do something with sample?
-        //                    }
-        //                }
-        //
-        //            })
+        //sampler setup
+        var samplerError: NSError?
+        
+        let samplerFilePath: String = NSBundle.mainBundle().pathForResource("developersSingle", ofType: "aif")
+        
+        
+        let sampleURL: NSURL = NSURL.URLWithString(samplerFilePath)
+        
+        let sampleURLS: AnyObject[]! = [sampleURL]
+        self.sampler.loadAudioFilesAtURLs(sampleURLS, error: &samplerError)
+        self.audioEngine.attachNode(self.sampler)
+        self.generatorNodes.append(self.sampler)
+        
+        
+        // tap
+        self.audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 8192, format: nil, block:
+            {
+                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
+                
+                for (var j = 0; j < Int(buffer.format.channelCount); j++)
+                {
+                    var frames = buffer.floatChannelData[j]
+                    
+                    var frameLength = Int(buffer.frameLength)
+                    
+                    for (var i = 0; i < frameLength; i++)
+                    {
+                        if (i % 1000 == 0) {
+                            //println("\(frames[i])")
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.outputMeter.progress = fabsf(frames[i])
+                            })
+                        }
+                    }
+                }
+                
+            })
         
         //effects setup
         
@@ -140,12 +163,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.audioEngine.connect(timePitch, to: distortion, format: format)
                 self.audioEngine.connect(distortion, to: delay, format: format)
                 self.audioEngine.connect(delay, to: mixer, format: format)
-            } else if node == self.audioEngine.inputNode {
+            } else if node == self.audioEngine.inputNode{
                 format = self.audioEngine.inputNode.inputFormatForBus(0)
                 self.audioEngine.connect(node, to: distortion, format: format)
                 self.audioEngine.connect(distortion, to: delay, format: format)
             } else {
-                // self.audioEngine.connect(node, to: delay, format: self.audioFile?.processingFormat)
+                format = self.audioEngine.inputNode.inputFormatForBus(0)
+                self.audioEngine.connect(node, to: delay, format: format)
             }
             
             self.audioEngine.connect(delay, to: mixer, format: format)
@@ -181,6 +205,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         var engineError: NSError?
         self.audioEngine.startAndReturnError(&engineError)
+        
+        if engineError != nil {
+            println("Error: \(engineError)")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -246,7 +274,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func delayOnOffChanged(delaySwitch : UISwitch) {
-        
         let delay: AVAudioUnitDelay = self.delays[delaySwitch.tag]
         
         if (delaySwitch.on) {
@@ -266,6 +293,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    @IBAction func samplerButtonPressed(sender : AnyObject) {
+        self.sampler.startNote(UInt8(self.samplerNote), withVelocity: 100, onChannel: 1)
+    }
+    
+    @IBAction func noteSliderChanged(slider : UISlider) {
+        self.samplerNote = Int(slider.value)
+    }
+    
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         return self.distortionPresets.count
     }
@@ -283,10 +318,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        
         let distortion = self.distortions[tableView.tag]
         distortion.loadFactoryPreset(AVAudioUnitDistortionPreset.fromRaw(indexPath.row)!)
-        
     }
     
 }
