@@ -294,7 +294,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func samplerButtonPressed(sender : AnyObject) {
-        self.sampler.startNote(UInt8(self.samplerNote), withVelocity: 100, onChannel: 1)
+        self.sampler.startNote(UInt8(self.samplerNote), withVelocity: 127, onChannel: 1)
     }
     
     @IBAction func noteSliderChanged(slider : UISlider) {

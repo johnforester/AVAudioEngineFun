@@ -163,7 +163,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DBa-lv-JNK">
-                                        <rect key="frame" x="122" y="48" width="51" height="31"/>
+                                        <rect key="frame" x="122" y="48" width="51.5" height="31"/>
                                         <connections>
                                             <action selector="delayOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="XKy-ES-kG9"/>
                                         </connections>
@@ -268,7 +268,9 @@
                                 <rect key="frame" x="537" y="159" width="211" height="146"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rG2-RK-geN">
-                                        <rect key="frame" x="74" y="58" width="82" height="30"/>
+                                        <rect key="frame" x="31" y="58" width="142" height="30"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="PLAY NOTE">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
