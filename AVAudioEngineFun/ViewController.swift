@@ -55,6 +55,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let sampler: AVAudioUnitSampler = AVAudioUnitSampler()
     var samplerNote: Int = 50
     
+    var sineWave: AVAudioPlayerNode = AVAudioPlayerNode()
+    
     var generatorNodes: AVAudioNode[] = AVAudioNode[]()
     
     @IBOutlet var filePlayerButton : UIButton
@@ -107,29 +109,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.audioEngine.attachNode(self.sampler)
         self.generatorNodes.append(self.sampler)
-        
-        // tap
-        self.audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 8192, format: nil, block:
-            {
-                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
-                
-                for (var j = 0; j < Int(buffer.format.channelCount); j++)
-                {
-                    var frames = buffer.floatChannelData[j]
-                    
-                    var frameLength = Int(buffer.frameLength)
-                    
-                    for (var i = 0; i < frameLength; i++)
-                    {
-                        if (i % 1000 == 0) {
-                            //println("\(frames[i])")
-                            dispatch_async(dispatch_get_main_queue(), {
-                                self.outputMeter.progress = fabsf(frames[i])
-                                })
-                        }
-                    }
-                }
-            })
         
         //effects setup
         
@@ -202,6 +181,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if engineError != nil {
             println("Error: \(engineError)")
         }
+        
+        // sine wave setup
+        
+        var phase: Double = 0
+        var wavelengthInSamples: Double = self.audioEngine.outputNode.outputFormatForBus(0).sampleRate / 440
+        
+        self.audioEngine.attachNode(self.sineWave)
+        self.audioEngine.connect(self.sineWave, to: self.audioEngine.mainMixerNode, format: nil)
+        
+        self.sineWave.installTapOnBus(0, bufferSize: 8192, format: nil, block:
+            {
+                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
+                
+                for (var j = 0; j < Int(buffer.format.channelCount); j++)
+                {
+                    var frames = buffer.floatChannelData[j]
+                    
+                    var frameLength = Int(buffer.frameLength)
+                    
+                    for i in 0..frameLength
+                    {
+                        frames[i] = CFloat(sin(2 * M_PI * (phase / wavelengthInSamples)));
+                        
+                        phase++
+                        
+                        if phase > wavelengthInSamples {
+                            phase -= wavelengthInSamples
+                        }
+                    }
+                }
+                
+                self.sineWave.scheduleBuffer(buffer, atTime: nil, options: nil, completionHandler:{})
+            })
     }
     
     override func didReceiveMemoryWarning() {
@@ -292,6 +304,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func noteSliderChanged(slider : UISlider) {
         self.samplerNote = Int(slider.value)
+    }
+    
+    @IBAction func sineWaveButtonPressed(sender : AnyObject) {
+        if self.sineWave.playing {
+            self.sineWave.pause()
+        } else {
+            self.sineWave.play()
+        }
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
