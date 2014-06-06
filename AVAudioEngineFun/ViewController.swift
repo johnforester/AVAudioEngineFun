@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     //MARK: - properties
     let audioEngine: AVAudioEngine = AVAudioEngine()
     let audioFilePlayer: AVAudioPlayerNode = AVAudioPlayerNode()
+    var audioFile: AVAudioFile? = nil
     
     var delays: AVAudioUnitDelay[] = AVAudioUnitDelay[]()
     let delayTimeTag: Int = 100
@@ -49,7 +50,7 @@ class ViewController: UIViewController {
         let fileURL: NSURL = NSURL.URLWithString(filePath)
         
         var error: NSError?
-        let file: AVAudioFile? = AVAudioFile(forReading: fileURL, error: &error)
+        self.audioFile = AVAudioFile(forReading: fileURL, error: &error)
         
         if let errorValue = error {
             println("ERROR: \(errorValue.localizedDescription)")
@@ -59,10 +60,6 @@ class ViewController: UIViewController {
         let mixer: AVAudioMixerNode = self.audioEngine.mainMixerNode
         
         self.audioEngine.attachNode(self.audioFilePlayer)
-        self.audioFilePlayer.scheduleFile(file, atTime: nil, completionHandler:
-            {
-                println("done playing file")
-            })
         
         self.generatorNodes.append(self.audioFilePlayer)
         
@@ -82,7 +79,7 @@ class ViewController: UIViewController {
             var format: AVAudioFormat? = nil
             
             if node == self.audioFilePlayer {
-                format = file?.processingFormat
+                format = self.audioFile?.processingFormat
                 
                 let timePitch = AVAudioUnitTimePitch()
                 self.audioEngine.attachNode(timePitch)
@@ -175,6 +172,10 @@ class ViewController: UIViewController {
             self.audioFilePlayer.pause()
             self.filePlayerButton.setTitle("play file", forState: .Normal)
         } else {
+            self.audioFilePlayer.scheduleFile(self.audioFile, atTime: nil, completionHandler:
+                {
+                    println("done playing file")
+                })
             self.audioFilePlayer.play()
             self.filePlayerButton.setTitle("pause", forState: .Normal)
         }
