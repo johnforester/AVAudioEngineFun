@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import QuartzCore
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - properties
     let audioEngine: AVAudioEngine = AVAudioEngine()
@@ -26,11 +26,38 @@ class ViewController: UIViewController {
     let pitchPitchTag: Int = 300
     let pitchRateTag: Int = 400
     
+    var distortions: AVAudioUnitDistortion[] = AVAudioUnitDistortion[]()
+    var distortionPresets = [
+        "DrumsBitBrush",
+        "DrumsBufferBeats",
+        "DrumsLoFi",
+        "MultiBrokenSpeaker",
+        "MultiCellphoneConcert",
+        "MultiDecimated1",
+        "MultiDecimated2",
+        "MultiDecimated3",
+        "MultiDecimated4",
+        "MultiDistortedFunk",
+        "MultiDistortedCubed",
+        "MultiDistortedSquared",
+        "MultiEcho1",
+        "MultiEcho2",
+        "MultiEchoTight1",
+        "MultiEchoTight2",
+        "MultiEverythingIsBroken",
+        "SpeechAlienChatter",
+        "SpeechCosmicInterference",
+        "SpeechGoldenPi",
+        "SpeechRadioTower",
+        "SpeechWaves",
+    ]
+    
     var generatorNodes: AVAudioNode[] = AVAudioNode[]()
     
     let updateTime: Float = 0.05
     
     var timer :NSTimer? = nil //set this in viewDidLoad
+    
     
     @IBOutlet var filePlayerButton : UIButton
     @IBOutlet var filePlaySlider : UISlider
@@ -58,24 +85,46 @@ class ViewController: UIViewController {
         }
         
         //player setup
-        let mixer: AVAudioMixerNode = self.audioEngine.mainMixerNode
         
         self.audioEngine.attachNode(self.audioFilePlayer)
-        
         self.generatorNodes.append(self.audioFilePlayer)
         
         //input setup
         self.audioEngine.inputNode.volume = 0
         self.generatorNodes.append(self.audioEngine.inputNode)
         
+        //wave tap
+//        self.audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 512, format: self.audioEngine.inputNode.inputFormatForBus(0), block:
+//            {
+//                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
+//                
+//                for (var j = 0; j < Int(buffer.format.channelCount); j++)
+//                {
+//                    var frames = buffer.floatChannelData[j]
+//                    
+//                    var frameLength = Int(buffer.frameLength)
+//                    
+//                    for (var i = 0; i < frameLength; i++)
+//                    {
+//                        //frames[i] do something with sample?
+//                    }
+//                }
+//                
+//            })
+        
         //effects setup
+        
+        let mixer: AVAudioMixerNode = self.audioEngine.mainMixerNode
         
         for node in self.generatorNodes
         {
             let delay = AVAudioUnitDelay()
             self.audioEngine.attachNode(delay)
-            
             self.delays.append(delay)
+            
+            let distortion = AVAudioUnitDistortion()
+            self.audioEngine.attachNode(distortion)
+            self.distortions.append(distortion)
             
             var format: AVAudioFormat? = nil
             
@@ -88,10 +137,15 @@ class ViewController: UIViewController {
                 self.pitches.append(timePitch)
                 
                 self.audioEngine.connect(node, to:timePitch, format:format)
-                self.audioEngine.connect(timePitch, to: delay, format: format)
+                self.audioEngine.connect(timePitch, to: distortion, format: format)
+                self.audioEngine.connect(distortion, to: delay, format: format)
+                self.audioEngine.connect(delay, to: mixer, format: format)
             } else if node == self.audioEngine.inputNode {
                 format = self.audioEngine.inputNode.inputFormatForBus(0)
-                self.audioEngine.connect(node, to: delay, format: format)
+                self.audioEngine.connect(node, to: distortion, format: format)
+                self.audioEngine.connect(distortion, to: delay, format: format)
+            } else {
+                // self.audioEngine.connect(node, to: delay, format: self.audioFile?.processingFormat)
             }
             
             self.audioEngine.connect(delay, to: mixer, format: format)
@@ -101,11 +155,17 @@ class ViewController: UIViewController {
         {
             let delay: AVAudioUnitDelay = self.delays[i]
             
-            let timeSlider: UISlider = self.view.viewWithTag(self.delayTimeTag + i) as UISlider
-            timeSlider.value = CFloat(delay.delayTime)
+            let slider: UISlider? = self.view.viewWithTag(self.delayTimeTag + i) as? UISlider
             
-            let feedbackSlider: UISlider = self.view.viewWithTag(self.delayFeedbackTag + i) as UISlider
-            feedbackSlider.value = CFloat(delay.feedback)
+            if let timeSlider = slider {
+                timeSlider.value = CFloat(delay.delayTime)
+            }
+            
+            let slider2: UISlider? = self.view.viewWithTag(self.delayFeedbackTag + i) as? UISlider
+            
+            if let feedbackSlider = slider2 {
+                feedbackSlider.value = CFloat(delay.feedback)
+            }
         }
         
         for (var i = 0; i < self.pitches.count; i++)
@@ -121,24 +181,6 @@ class ViewController: UIViewController {
         
         var engineError: NSError?
         self.audioEngine.startAndReturnError(&engineError)
-        
-        
-        //output tap
-        //        mixer.installTapOnBus(0, bufferSize: 512, format: file?.processingFormat, block:
-        //            {
-        //                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
-        //
-        //                for (var j = 0; j < Int(buffer.format.channelCount); j++)
-        //                {
-        //                    var frames = buffer.floatChannelData[j]
-        //
-        //                    var frameLength = Int(buffer.frameLength)
-        //                    for (var i = 0; i < frameLength; i++)
-        //                    {
-        //                        //frames[i] do something with sample?
-        //                    }
-        //                }
-        //            })
     }
     
     override func didReceiveMemoryWarning() {
@@ -207,5 +249,29 @@ class ViewController: UIViewController {
         let delay: AVAudioUnitDelay = self.delays[delaySwitch.tag - self.delayOnOffTag]
         delay.wetDryMix = 0
     }
+    
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        return self.distortionPresets.count
+    }
+    
+    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("DistortionCell") as? UITableViewCell
+        
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: "DistortionCell")
+        }
+        
+        cell!.textLabel.text = self.distortionPresets[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        
+        let distortion = self.distortions[tableView.tag]
+        distortion.loadFactoryPreset(AVAudioUnitDistortionPreset.fromRaw(indexPath.row)!)
+
+    }
+    
 }
 
