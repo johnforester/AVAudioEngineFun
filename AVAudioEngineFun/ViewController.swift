@@ -15,8 +15,9 @@ class ViewController: UIViewController {
     //MARK: - properties
     let audioEngine: AVAudioEngine = AVAudioEngine()
     let audioFilePlayer: AVAudioPlayerNode = AVAudioPlayerNode()
-    let delay: AVAudioUnitDelay = AVAudioUnitDelay()
     
+    var delays: AVAudioUnitDelay[] = AVAudioUnitDelay[]()
+    var generatorNodes: AVAudioNode[] = AVAudioNode[]()
     
     let updateTime: Float = 0.05
     
@@ -28,14 +29,14 @@ class ViewController: UIViewController {
     @IBOutlet var delayTimeSlider : UISlider
     @IBOutlet var delayFeedbackSlider : UISlider
     
+    @IBOutlet var micSwitch : UISwitch
+    
     //MARK: - UIViewController methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //UI setup
         self.filePlaySlider.value = self.audioFilePlayer.volume
-        self.delayFeedbackSlider.value = self.delay.feedback
-        self.delayTimeSlider.value = CFloat(self.delay.delayTime)
         
         //audio file
         let filePath: String = NSBundle.mainBundle().pathForResource("developers", ofType: "mp3")
@@ -60,31 +61,52 @@ class ViewController: UIViewController {
                 println("done playing file")
             })
         
-        //start engine
-        var engineError: NSError?
-        self.audioEngine.startAndReturnError(&engineError)
+        self.generatorNodes.append(self.audioFilePlayer)
+        
+        //input setup
+        self.generatorNodes.append(self.audioEngine.inputNode)
         
         //effects setup
-        self.audioEngine.attachNode(self.delay)
-        self.audioEngine.connect(self.audioFilePlayer, to:self.delay, format: file?.processingFormat)
-        self.audioEngine.connect(self.delay, to: mixer, format: file?.processingFormat)
+        
+        for node in self.generatorNodes
+        {
+            let delay = AVAudioUnitDelay()
+            self.audioEngine.attachNode(delay)
+
+            self.delays.append(delay)
+            
+            var format: AVAudioFormat? = nil
+            
+            if node == self.audioFilePlayer {
+                format = file?.processingFormat
+            } else if node == self.audioEngine.inputNode {
+                format = self.audioEngine.inputNode.inputFormatForBus(0)
+            }
+         
+            self.audioEngine.connect(node, to:delay, format:format)
+            self.audioEngine.connect(delay, to: mixer, format: self.audioEngine.inputNode.inputFormatForBus(0))
+        }
+
+        var engineError: NSError?
+        self.audioEngine.startAndReturnError(&engineError)
+    
         
         //output tap
-        mixer.installTapOnBus(0, bufferSize: 512, format: file?.processingFormat, block:
-            {
-                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
-                
-                for (var j = 0; j < Int(buffer.format.channelCount); j++)
-                {
-                    var frames = buffer.floatChannelData[j]
-                    
-                    var frameLength = Int(buffer.frameLength)
-                    for (var i = 0; i < frameLength; i++)
-                    {
-                        //frames[i] do something with sample?
-                    }
-                }
-            })
+//        mixer.installTapOnBus(0, bufferSize: 512, format: file?.processingFormat, block:
+//            {
+//                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
+//                
+//                for (var j = 0; j < Int(buffer.format.channelCount); j++)
+//                {
+//                    var frames = buffer.floatChannelData[j]
+//                    
+//                    var frameLength = Int(buffer.frameLength)
+//                    for (var i = 0; i < frameLength; i++)
+//                    {
+//                        //frames[i] do something with sample?
+//                    }
+//                }
+//            })
     }
     
     override func didReceiveMemoryWarning() {
@@ -105,6 +127,14 @@ class ViewController: UIViewController {
         self.audioFilePlayer.volume = self.filePlaySlider.value
     }
     
+    @IBAction func micSwitchChanged(micSwitch : UISwitch) {
+        if micSwitch.on {
+            self.audioEngine.inputNode.volume = 1
+        } else {
+            self.audioEngine.inputNode.volume = 0
+        }
+    }
+    
     //MARK: - IBAction methods
     @IBAction func playFileButtonPressed(sender : AnyObject) {
         if (self.audioFilePlayer.playing) {
@@ -117,11 +147,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func delayFeedbackSliderChanged(sender : AnyObject) {
-        self.delay.feedback = self.delayFeedbackSlider.value
+        //self.delay.feedback = self.delayFeedbackSlider.value
     }
     
     @IBAction func delayTimeSliderChanged(sender : AnyObject) {
-        self.delay.delayTime = NSTimeInterval(self.delayTimeSlider.value)
+        //self.delay.delayTime = NSTimeInterval(self.delayTimeSlider.value)
     }
 }
 
