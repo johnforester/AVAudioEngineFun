@@ -20,6 +20,10 @@ class ViewController: UIViewController {
     let delayTimeTag: Int = 100
     let delayFeedbackTag: Int = 200
     
+    var pitches: AVAudioUnitTimePitch[] = AVAudioUnitTimePitch[]()
+    let pitchPitchTag: Int = 300
+    let pitchRateTag: Int = 400
+    
     var generatorNodes: AVAudioNode[] = AVAudioNode[]()
     
     let updateTime: Float = 0.05
@@ -35,7 +39,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //UI setup
         self.filePlaySlider.value = self.audioFilePlayer.volume
         
         //audio file
@@ -64,6 +67,7 @@ class ViewController: UIViewController {
         self.generatorNodes.append(self.audioFilePlayer)
         
         //input setup
+        self.audioEngine.inputNode.volume = 0
         self.generatorNodes.append(self.audioEngine.inputNode)
         
         //effects setup
@@ -79,12 +83,20 @@ class ViewController: UIViewController {
             
             if node == self.audioFilePlayer {
                 format = file?.processingFormat
+                
+                let timePitch = AVAudioUnitTimePitch()
+                self.audioEngine.attachNode(timePitch)
+                
+                self.pitches.append(timePitch)
+                
+                self.audioEngine.connect(node, to:timePitch, format:format)
+                self.audioEngine.connect(timePitch, to: delay, format: format)
             } else if node == self.audioEngine.inputNode {
                 format = self.audioEngine.inputNode.inputFormatForBus(0)
+                self.audioEngine.connect(node, to: delay, format: format)
             }
-         
-            self.audioEngine.connect(node, to:delay, format:format)
-            self.audioEngine.connect(delay, to: mixer, format: self.audioEngine.inputNode.inputFormatForBus(0))
+            
+            self.audioEngine.connect(delay, to: mixer, format: format)
         }
         
         for (var i = 0; i < self.delays.count; i++)
@@ -98,6 +110,17 @@ class ViewController: UIViewController {
             feedbackSlider.value = CFloat(delay.feedback)
         }
 
+        for (var i = 0; i < self.pitches.count; i++)
+        {
+            let pitch: AVAudioUnitTimePitch = self.pitches[i]
+            
+            let pitchSlider: UISlider = self.view.viewWithTag(self.pitchPitchTag + i) as UISlider
+            pitchSlider.value = pitch.pitch
+            
+            let rateSlider: UISlider = self.view.viewWithTag(self.pitchRateTag + i) as UISlider
+            rateSlider.value = pitch.rate
+        }
+        
         var engineError: NSError?
         self.audioEngine.startAndReturnError(&engineError)
     
@@ -165,6 +188,16 @@ class ViewController: UIViewController {
     @IBAction func delayTimeSliderChanged(slider : UISlider) {
         let delay: AVAudioUnitDelay = self.delays[slider.tag - self.delayTimeTag]
         delay.delayTime = NSTimeInterval(slider.value)
+    }
+    
+    @IBAction func pitchSliderChanged(slider : UISlider) {
+        let pitch: AVAudioUnitTimePitch = self.pitches[slider.tag - self.pitchPitchTag]
+        pitch.pitch = slider.value
+    }
+    
+    @IBAction func rateSliderChanged(slider : UISlider) {
+        let pitch: AVAudioUnitTimePitch = self.pitches[slider.tag - self.pitchRateTag]
+        pitch.rate = slider.value
     }
 }
 
