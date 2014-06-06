@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="q3v-qU-NCU">
-                                <rect key="frame" x="357" y="458" width="218" height="114"/>
+                                <rect key="frame" x="357" y="443" width="218" height="114"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="IkZ-T1-xUe">
@@ -98,8 +98,8 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" tag="500" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAj-KW-tGa">
-                                        <rect key="frame" x="107" y="48" width="51" height="31"/>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAj-KW-tGa">
+                                        <rect key="frame" x="107" y="48" width="51.5" height="31"/>
                                         <connections>
                                             <action selector="delayOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="BOj-pi-yam"/>
                                         </connections>
@@ -117,7 +117,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xs5-Kl-kFV">
-                                        <rect key="frame" x="20" y="70" width="51.5" height="31"/>
+                                        <rect key="frame" x="20" y="70" width="51" height="31"/>
                                         <connections>
                                             <action selector="micSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="flm-sm-LEj"/>
                                         </connections>
@@ -158,8 +158,11 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" tag="501" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DBa-lv-JNK">
+                                    <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DBa-lv-JNK">
                                         <rect key="frame" x="122" y="48" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="delayOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="XKy-ES-kG9"/>
+                                        </connections>
                                     </switch>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -201,7 +204,7 @@
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MTm-76-q8K">
-                                <rect key="frame" x="364" y="550" width="302" height="198"/>
+                                <rect key="frame" x="364" y="535" width="302" height="381"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DISTORTION NODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIm-ox-7tA">
                                         <rect key="frame" x="34" y="20" width="154.5" height="20.5"/>
@@ -210,18 +213,24 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Awt-CA-K6V">
-                                        <rect key="frame" x="20" y="46" width="266.5" height="138"/>
+                                        <rect key="frame" x="20" y="46" width="266.5" height="315"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="bOA-US-WCH"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="Mqu-iF-EId"/>
                                         </connections>
                                     </tableView>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XY2-6U-Vbm">
+                                        <rect key="frame" x="233" y="7" width="51.5" height="31"/>
+                                        <connections>
+                                            <action selector="distortionOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="mg7-uw-fTO"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZsB-zj-tXY">
-                                <rect key="frame" x="22" y="691" width="302" height="198"/>
+                                <rect key="frame" x="22" y="691" width="302" height="319"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DISTORTION NODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4t8-yz-fwk">
                                         <rect key="frame" x="34" y="20" width="154.5" height="20.5"/>
@@ -230,13 +239,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Y5C-Vn-VWh">
-                                        <rect key="frame" x="20" y="46" width="266.5" height="138"/>
+                                        <rect key="frame" x="20" y="46" width="266.5" height="253"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="G2T-dz-J02"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="kVk-Mt-wdT"/>
                                         </connections>
                                     </tableView>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eQF-7v-Z75">
+                                        <rect key="frame" x="226" y="9" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="distortionOnOffChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Axe-fi-lcz"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.43137254899999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>

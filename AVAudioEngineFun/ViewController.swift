@@ -94,23 +94,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.generatorNodes.append(self.audioEngine.inputNode)
         
         //wave tap
-//        self.audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 512, format: self.audioEngine.inputNode.inputFormatForBus(0), block:
-//            {
-//                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
-//                
-//                for (var j = 0; j < Int(buffer.format.channelCount); j++)
-//                {
-//                    var frames = buffer.floatChannelData[j]
-//                    
-//                    var frameLength = Int(buffer.frameLength)
-//                    
-//                    for (var i = 0; i < frameLength; i++)
-//                    {
-//                        //frames[i] do something with sample?
-//                    }
-//                }
-//                
-//            })
+        //        self.audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 512, format: self.audioEngine.inputNode.inputFormatForBus(0), block:
+        //            {
+        //                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
+        //
+        //                for (var j = 0; j < Int(buffer.format.channelCount); j++)
+        //                {
+        //                    var frames = buffer.floatChannelData[j]
+        //
+        //                    var frameLength = Int(buffer.frameLength)
+        //
+        //                    for (var i = 0; i < frameLength; i++)
+        //                    {
+        //                        //frames[i] do something with sample?
+        //                    }
+        //                }
+        //
+        //            })
         
         //effects setup
         
@@ -246,8 +246,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func delayOnOffChanged(delaySwitch : UISwitch) {
-        let delay: AVAudioUnitDelay = self.delays[delaySwitch.tag - self.delayOnOffTag]
-        delay.wetDryMix = 0
+        
+        let delay: AVAudioUnitDelay = self.delays[delaySwitch.tag]
+        
+        if (delaySwitch.on) {
+            delay.wetDryMix = 100
+        } else {
+            delay.wetDryMix = 0
+        }
+    }
+    
+    @IBAction func distortionOnOffChanged(distSwitch : UISwitch) {
+        let distortion = self.distortions[distSwitch.tag]
+        
+        if distSwitch.on {
+            distortion.wetDryMix = 50
+        } else {
+            distortion.wetDryMix = 0
+        }
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
@@ -270,7 +286,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let distortion = self.distortions[tableView.tag]
         distortion.loadFactoryPreset(AVAudioUnitDistortionPreset.fromRaw(indexPath.row)!)
-
+        
     }
     
 }
