@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         {
             let delay = AVAudioUnitDelay()
             self.audioEngine.attachNode(delay)
-
+            
             self.delays.append(delay)
             
             var format: AVAudioFormat? = nil
@@ -100,14 +100,14 @@ class ViewController: UIViewController {
         for (var i = 0; i < self.delays.count; i++)
         {
             let delay: AVAudioUnitDelay = self.delays[i]
-
+            
             let timeSlider: UISlider = self.view.viewWithTag(self.delayTimeTag + i) as UISlider
             timeSlider.value = CFloat(delay.delayTime)
             
             let feedbackSlider: UISlider = self.view.viewWithTag(self.delayFeedbackTag + i) as UISlider
             feedbackSlider.value = CFloat(delay.feedback)
         }
-
+        
         for (var i = 0; i < self.pitches.count; i++)
         {
             let pitch: AVAudioUnitTimePitch = self.pitches[i]
@@ -121,24 +121,24 @@ class ViewController: UIViewController {
         
         var engineError: NSError?
         self.audioEngine.startAndReturnError(&engineError)
-    
+        
         
         //output tap
-//        mixer.installTapOnBus(0, bufferSize: 512, format: file?.processingFormat, block:
-//            {
-//                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
-//                
-//                for (var j = 0; j < Int(buffer.format.channelCount); j++)
-//                {
-//                    var frames = buffer.floatChannelData[j]
-//                    
-//                    var frameLength = Int(buffer.frameLength)
-//                    for (var i = 0; i < frameLength; i++)
-//                    {
-//                        //frames[i] do something with sample?
-//                    }
-//                }
-//            })
+        //        mixer.installTapOnBus(0, bufferSize: 512, format: file?.processingFormat, block:
+        //            {
+        //                (buffer: AVAudioPCMBuffer!,time: AVAudioTime!) -> Void in
+        //
+        //                for (var j = 0; j < Int(buffer.format.channelCount); j++)
+        //                {
+        //                    var frames = buffer.floatChannelData[j]
+        //
+        //                    var frameLength = Int(buffer.frameLength)
+        //                    for (var i = 0; i < frameLength; i++)
+        //                    {
+        //                        //frames[i] do something with sample?
+        //                    }
+        //                }
+        //            })
     }
     
     override func didReceiveMemoryWarning() {
@@ -204,7 +204,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func delayOnOffChanged(delaySwitch : UISwitch) {
-            let delay: AVAudioUnitDelay = self.delays[delaySwitch.tag - self.delayOnOffTag]
+        let delay: AVAudioUnitDelay = self.delays[delaySwitch.tag - self.delayOnOffTag]
         delay.wetDryMix = 0
     }
 }
