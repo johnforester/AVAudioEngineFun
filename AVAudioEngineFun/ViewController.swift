@@ -17,16 +17,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let audioFilePlayer: AVAudioPlayerNode = AVAudioPlayerNode()
     var audioFile: AVAudioFile? = nil
     
-    var delays: AVAudioUnitDelay[] = AVAudioUnitDelay[]()
+    var delays: [AVAudioUnitDelay] = [AVAudioUnitDelay]()
     let delayTimeTag: Int = 100
     let delayFeedbackTag: Int = 200
     let delayOnOffTag: Int = 500
     
-    var pitches: AVAudioUnitTimePitch[] = AVAudioUnitTimePitch[]()
+    var pitches: [AVAudioUnitTimePitch] = [AVAudioUnitTimePitch]()
     let pitchPitchTag: Int = 300
     let pitchRateTag: Int = 400
     
-    var distortions: AVAudioUnitDistortion[] = AVAudioUnitDistortion[]()
+    var distortions: [AVAudioUnitDistortion] = [AVAudioUnitDistortion]()
     var distortionPresets = [
         "DrumsBitBrush",
         "DrumsBufferBeats",
@@ -57,7 +57,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var sineWave: AVAudioPlayerNode = AVAudioPlayerNode()
     
-    var generatorNodes: AVAudioNode[] = AVAudioNode[]()
+    var generatorNodes: [AVAudioNode] = [AVAudioNode]()
     
     @IBOutlet var filePlayerButton : UIButton
     @IBOutlet var filePlaySlider : UISlider
@@ -97,7 +97,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //sampler setup
         let samplerFilePath: String = NSBundle.mainBundle().pathForResource("developersSingle", ofType: "aif")
         let sampleURL: NSURL = NSURL.URLWithString(samplerFilePath)
-        let sampleURLS: AnyObject[]! = [sampleURL]
+        let sampleURLS: [AnyObject]! = [sampleURL]
         
         var samplerError: NSError?
         
@@ -200,8 +200,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     
                     var frameLength = Int(buffer.frameLength)
                     
-                    for i in 0..frameLength
+                    for i in 0..<frameLength
                     {
+                        
                         frames[i] = CFloat(sin(2 * M_PI * (phase / wavelengthInSamples)));
                         
                         phase++
