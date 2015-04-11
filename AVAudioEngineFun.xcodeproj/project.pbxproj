@@ -13,19 +13,8 @@
 		7A8AC48F1940EFD8004545D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AC48E1940EFD8004545D1 /* ViewController.swift */; };
 		7A8AC4921940EFD8004545D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A8AC4901940EFD8004545D1 /* Main.storyboard */; };
 		7A8AC4941940EFD8004545D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A8AC4931940EFD8004545D1 /* Images.xcassets */; };
-		7A8AC4A01940EFD8004545D1 /* AVAudioEngineFunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AC49F1940EFD8004545D1 /* AVAudioEngineFunTests.swift */; };
 		7A8AC4AC1940F91F004545D1 /* developers.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7A8AC4AB1940F912004545D1 /* developers.aif */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7A8AC49A1940EFD8004545D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7A8AC47F1940EFD8004545D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7A8AC4861940EFD8004545D1;
-			remoteInfo = AVAudioEngineFun;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7A6B4ACA194239B40040F242 /* developersSingle.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = developersSingle.aif; sourceTree = "<group>"; };
@@ -36,21 +25,11 @@
 		7A8AC48E1940EFD8004545D1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7A8AC4911940EFD8004545D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7A8AC4931940EFD8004545D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7A8AC4991940EFD8004545D1 /* AVAudioEngineFunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVAudioEngineFunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A8AC49E1940EFD8004545D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7A8AC49F1940EFD8004545D1 /* AVAudioEngineFunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioEngineFunTests.swift; sourceTree = "<group>"; };
 		7A8AC4AB1940F912004545D1 /* developers.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = developers.aif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7A8AC4841940EFD8004545D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7A8AC4961940EFD8004545D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -64,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				7A8AC4891940EFD8004545D1 /* AVAudioEngineFun */,
-				7A8AC49C1940EFD8004545D1 /* AVAudioEngineFunTests */,
 				7A8AC4881940EFD8004545D1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,7 +51,6 @@
 			isa = PBXGroup;
 			children = (
 				7A8AC4871940EFD8004545D1 /* AVAudioEngineFun.app */,
-				7A8AC4991940EFD8004545D1 /* AVAudioEngineFunTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,23 +78,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7A8AC49C1940EFD8004545D1 /* AVAudioEngineFunTests */ = {
-			isa = PBXGroup;
-			children = (
-				7A8AC49F1940EFD8004545D1 /* AVAudioEngineFunTests.swift */,
-				7A8AC49D1940EFD8004545D1 /* Supporting Files */,
-			);
-			path = AVAudioEngineFunTests;
-			sourceTree = "<group>";
-		};
-		7A8AC49D1940EFD8004545D1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7A8AC49E1940EFD8004545D1 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,24 +98,6 @@
 			productReference = 7A8AC4871940EFD8004545D1 /* AVAudioEngineFun.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7A8AC4981940EFD8004545D1 /* AVAudioEngineFunTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7A8AC4A61940EFD8004545D1 /* Build configuration list for PBXNativeTarget "AVAudioEngineFunTests" */;
-			buildPhases = (
-				7A8AC4951940EFD8004545D1 /* Sources */,
-				7A8AC4961940EFD8004545D1 /* Frameworks */,
-				7A8AC4971940EFD8004545D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7A8AC49B1940EFD8004545D1 /* PBXTargetDependency */,
-			);
-			name = AVAudioEngineFunTests;
-			productName = AVAudioEngineFunTests;
-			productReference = 7A8AC4991940EFD8004545D1 /* AVAudioEngineFunTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -167,10 +109,6 @@
 				TargetAttributes = {
 					7A8AC4861940EFD8004545D1 = {
 						CreatedOnToolsVersion = 6.0;
-					};
-					7A8AC4981940EFD8004545D1 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 7A8AC4861940EFD8004545D1;
 					};
 				};
 			};
@@ -188,7 +126,6 @@
 			projectRoot = "";
 			targets = (
 				7A8AC4861940EFD8004545D1 /* AVAudioEngineFun */,
-				7A8AC4981940EFD8004545D1 /* AVAudioEngineFunTests */,
 			);
 		};
 /* End PBXProject section */
@@ -206,13 +143,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A8AC4971940EFD8004545D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -225,23 +155,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A8AC4951940EFD8004545D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7A8AC4A01940EFD8004545D1 /* AVAudioEngineFunTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7A8AC49B1940EFD8004545D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7A8AC4861940EFD8004545D1 /* AVAudioEngineFun */;
-			targetProxy = 7A8AC49A1940EFD8004545D1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7A8AC4901940EFD8004545D1 /* Main.storyboard */ = {
@@ -340,6 +254,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = AVAudioEngineFun/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -351,44 +266,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = AVAudioEngineFun/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		7A8AC4A71940EFD8004545D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AVAudioEngineFun.app/AVAudioEngineFun";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AVAudioEngineFunTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		7A8AC4A81940EFD8004545D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AVAudioEngineFun.app/AVAudioEngineFun";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AVAudioEngineFunTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
@@ -409,15 +289,6 @@
 			buildConfigurations = (
 				7A8AC4A41940EFD8004545D1 /* Debug */,
 				7A8AC4A51940EFD8004545D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7A8AC4A61940EFD8004545D1 /* Build configuration list for PBXNativeTarget "AVAudioEngineFunTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7A8AC4A71940EFD8004545D1 /* Debug */,
-				7A8AC4A81940EFD8004545D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

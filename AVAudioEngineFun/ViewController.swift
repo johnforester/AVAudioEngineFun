@@ -12,6 +12,10 @@ import QuartzCore
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     //MARK: - properties
     let audioEngine: AVAudioEngine = AVAudioEngine()
     let audioFilePlayer: AVAudioPlayerNode = AVAudioPlayerNode()
@@ -59,24 +63,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var generatorNodes: [AVAudioNode] = [AVAudioNode]()
     
-    @IBOutlet var filePlayerButton : UIButton
-    @IBOutlet var filePlaySlider : UISlider
+    @IBOutlet var filePlayerButton : UIButton?
+    @IBOutlet var filePlaySlider : UISlider?
     
-    @IBOutlet var micSwitch : UISwitch
-    @IBOutlet var outputMeter : UIProgressView
+    @IBOutlet var micSwitch : UISwitch?
+    @IBOutlet var outputMeter : UIProgressView?
     
     //MARK: - UIViewController methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.filePlaySlider.value = self.audioFilePlayer.volume
+        self.filePlaySlider!.value = self.audioFilePlayer.volume
         
         //audio file
-        let filePath: String = NSBundle.mainBundle().pathForResource("developers", ofType: "aif")
+        let filePath: String = NSBundle.mainBundle().pathForResource("developers", ofType: "aif")!
         
         println("\(filePath)")
         
-        let fileURL: NSURL = NSURL.URLWithString(filePath)
+        let fileURL: NSURL = NSURL(fileURLWithPath: filePath)!
         
         var error: NSError?
         self.audioFile = AVAudioFile(forReading: fileURL, error: &error)
@@ -95,8 +99,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.generatorNodes.append(self.audioEngine.inputNode)
         
         //sampler setup
-        let samplerFilePath: String = NSBundle.mainBundle().pathForResource("developersSingle", ofType: "aif")
-        let sampleURL: NSURL = NSURL.URLWithString(samplerFilePath)
+        let samplerFilePath: String = NSBundle.mainBundle().pathForResource("developersSingle", ofType: "aif")!
+        let sampleURL: NSURL = NSURL(fileURLWithPath: samplerFilePath)!
         let sampleURLS: [AnyObject]! = [sampleURL]
         
         var samplerError: NSError?
@@ -168,10 +172,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             let pitch: AVAudioUnitTimePitch = self.pitches[i]
             
-            let pitchSlider: UISlider = self.view.viewWithTag(self.pitchPitchTag + i) as UISlider
+            let pitchSlider: UISlider = self.view.viewWithTag(self.pitchPitchTag + i) as! UISlider
             pitchSlider.value = pitch.pitch
             
-            let rateSlider: UISlider = self.view.viewWithTag(self.pitchRateTag + i) as UISlider
+            let rateSlider: UISlider = self.view.viewWithTag(self.pitchRateTag + i) as! UISlider
             rateSlider.value = pitch.rate
         }
         
@@ -232,7 +236,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func filePlayerSliderChanged(sender : AnyObject) {
-        self.audioFilePlayer.volume = self.filePlaySlider.value
+        self.audioFilePlayer.volume = self.filePlaySlider!.value
     }
     
     @IBAction func micSwitchChanged(micSwitch : UISwitch) {
@@ -247,15 +251,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func playFileButtonPressed(sender : AnyObject) {
         if (self.audioFilePlayer.playing) {
             self.audioFilePlayer.pause()
-            self.filePlayerButton.setTitle("play file", forState: .Normal)
+            self.filePlayerButton!.setTitle("play file", forState: .Normal)
         } else {
             self.audioFilePlayer.scheduleFile(self.audioFile, atTime: nil, completionHandler:
                 {
                     println("done playing file")
-                    self.filePlayerButton.setTitle("pause", forState: .Normal)
+                    self.filePlayerButton!.setTitle("pause", forState: .Normal)
                 })
             self.audioFilePlayer.play()
-            self.filePlayerButton.setTitle("pause", forState: .Normal)
+            self.filePlayerButton!.setTitle("pause", forState: .Normal)
         }
     }
     
@@ -315,25 +319,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    // MARK:- UITableViewDataSource and UITableViewDelegate
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.distortionPresets.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("DistortionCell") as? UITableViewCell
         
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: "DistortionCell")
         }
         
-        cell!.textLabel.text = self.distortionPresets[indexPath.row]
+        cell!.textLabel!.text = self.distortionPresets[indexPath.row]
         
-        return cell
+        return cell!
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let distortion = self.distortions[tableView.tag]
-        distortion.loadFactoryPreset(AVAudioUnitDistortionPreset.fromRaw(indexPath.row)!)
+        distortion.loadFactoryPreset(AVAudioUnitDistortionPreset(rawValue: indexPath.row)!)
     }
     
 }
